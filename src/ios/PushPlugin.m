@@ -645,29 +645,29 @@
     __weak UNUserNotificationCenter *weakCenter = center;
     [center getNotificationSettingsWithCompletionHandler:^(UNNotificationSettings * _Nonnull settings) {
 
-        switch (settings.authorizationStatus) {
-            case UNAuthorizationStatusNotDetermined:
-            {
+        // switch (settings.authorizationStatus) {
+        //     case UNAuthorizationStatusNotDetermined:
+        //     {
                 [weakCenter requestAuthorizationWithOptions:authorizationOptions completionHandler:^(BOOL granted, NSError * _Nullable error) {
-                    if (granted) {
+        //             if (granted) {
                         [self performSelectorOnMainThread:@selector(registerForRemoteNotifications)
                                                withObject:nil
                                             waitUntilDone:NO];
-                    }
+        //             }
                 }];
-                break;
-            }
-            case UNAuthorizationStatusAuthorized:
-            {
-                [self performSelectorOnMainThread:@selector(registerForRemoteNotifications)
-                                       withObject:nil
-                                    waitUntilDone:NO];
-                break;
-            }
-            case UNAuthorizationStatusDenied:
-            default:
-                break;
-        }
+        //         break;
+        //     }
+        //     case UNAuthorizationStatusAuthorized:
+        //     {
+        //         [self performSelectorOnMainThread:@selector(registerForRemoteNotifications)
+        //                                withObject:nil
+        //                             waitUntilDone:NO];
+        //         break;
+        //     }
+        //     case UNAuthorizationStatusDenied:
+        //     default:
+        //         break;
+        // }
     }];
 }
 
